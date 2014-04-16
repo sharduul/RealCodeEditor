@@ -12,10 +12,21 @@
     </head>
     <body>
         <h1>ShareJS Tutorial</h1>
-        <textarea id='sharetext' style="width:300px; height:300px;"></textarea>
-		<div id="editor"></div>
+		<form id="codeform" action="" method="">
+			<textarea id='sharetext' style="width:300px; height:300px;"></textarea>
+			<button type="submit" class="btn btn-primary" id="runsubmit" name="runsubmit" style="margin-left:0px;">
+				Run
+			</button>
+		</form>
+		<button class="" onclick="xxxxx()" id="runsubmit2" name="runsubmit2" style="margin-left:0px;">
+				Run
+		</button>
+		<div id="editor">
+		</div>
         <!-- NEW -->
         <script>
+			
+			
 			var elem = document.getElementById("sharetext");
             // connect to the server
 			
@@ -28,6 +39,18 @@
                     doc.attach_textarea(elem);
                 }
             });
+			
+			
+			function xxxxx()
+			{
+				var sys = require('sys')
+				var exec = require('child_process').exec;
+				function puts(error, stdout, stderr) {sys.puts(stdout)}
+				var ttt = exec("ls -la", puts);
+				document.getElementById("sharetext").value = ttt;
+				//console.log("\\nnasdfsdf\n\n");
+			}
+			
 </script>
         <!-- /NEW -->
     </body>
