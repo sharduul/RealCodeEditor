@@ -2,11 +2,11 @@
     <head>
         <title>ShareJS Tutorial</title>
         <!-- NEW -->
-        <script src="bcsocket.js"></script>             <!-- add transport -->
-		<script src="bcsocket-uncompressed.js"></script>             <!-- add transport -->
-        <script src="webclient/share.js"></script>      <!-- ShareJS -->
-		<script src="webclient/share.uncompressed.js"></script>      <!-- ShareJS -->
-        <script src="/webclient/textarea.js"></script>   <!-- helper to attach textarea to ShareJS server -->
+        <script src="lib/sharejs/bcsocket.js"></script>             <!-- add transport -->
+		<script src="lib/sharejs/bcsocket-uncompressed.js"></script>             <!-- add transport -->
+        <script src="lib/sharejs/webclient/share.js"></script>      <!-- ShareJS -->
+		<script src="lib/sharejs/webclient/share.uncompressed.js"></script>      <!-- ShareJS -->
+        <script src="lib/sharejs/webclient/textarea.js"></script>   <!-- helper to attach textarea to ShareJS server -->
 
         <!-- /NEW -->
     </head>
@@ -18,7 +18,7 @@
 				Run
 			</button>
 		</form>
-		<button class="" onclick="xxxxx()" id="runsubmit2" name="runsubmit2" style="margin-left:0px;">
+		<button class="" onclick="testfun()" id="runsubmit2" name="runsubmit2" style="margin-left:0px;">
 				Run
 		</button>
 		<div id="editor">
@@ -32,22 +32,20 @@
 			
             var connection = sharejs.open('test', 'text', function(error, doc) {
                 // this function is called once the connection is opened
-                if (error) {
+                if (error) 
+				{
                     console.log("ERROR:", error);
-                } else {
+                } 
+				else 
+				{
                     // attach the ShareJS document to the textarea
                     doc.attach_textarea(elem);
                 }
             });
 			
 			
-			function xxxxx()
+			function testfun()
 			{
-				var sys = require('sys')
-				var exec = require('child_process').exec;
-				function puts(error, stdout, stderr) {sys.puts(stdout)}
-				var ttt = exec("ls -la", puts);
-				document.getElementById("sharetext").value = ttt;
 				//console.log("\\nnasdfsdf\n\n");
 			}
 			

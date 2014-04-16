@@ -13,11 +13,7 @@ var options = {db:{type:'none'}}; // See docs for options. {type: 'redis'} to en
 // Attach the sharejs REST and Socket.io interfaces to the server
 sharejs.attach(app, options);
 
-//app.use(app.router); //Now router comes first and will be executed before static middleware
-//
-
 //app.use(app.router);
-
 //app.set('views', __dirname + '/views');
 //app.engine('html', require('ejs').renderFile);
 
@@ -26,12 +22,11 @@ server.listen(8000, function () {
 });
 
 app.get('/', function(req, res) {
-	console.log("sdfasf");
+	//console.log("test log");
 	
-	var circle = require('./test.js');
+	var circle = require('./testssh2.js');
 	// console.log( 'The area of a circle of radius 4 is '
            // + circle.area(4));
-		   
 		   
     res.redirect('index.html');
 });
