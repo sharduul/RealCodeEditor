@@ -1,6 +1,11 @@
 <html>
     <head>
-        <title>ShareJS Tutorial</title>
+        <title>Real Code Editor</title>
+		
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/css/app.css">
+	
+	
         <!-- NEW -->
         <script src="lib/sharejs/bcsocket.js"></script>             <!-- add transport -->
 		<script src="lib/sharejs/bcsocket-uncompressed.js"></script>             <!-- add transport -->
@@ -11,16 +16,21 @@
         <!-- /NEW -->
     </head>
     <body>
-        <h1>ShareJS Tutorial</h1>
-		<form id="codeform" action="" method="">
+        <h2>Real Code Editor</h2>
+		
+		<div class="container-fluid" ng-controller="EditProfileController">
+		<form id="codeform" action="run_program" method="">
+			<div class="row-fluid">
 			<textarea id='sharetext' style="width:300px; height:300px;"></textarea>
-			<button type="submit" class="btn btn-primary" id="runsubmit" name="runsubmit" style="margin-left:0px;">
+			</div>
+			<div class="row-fluid">
+			<button type="submit" class="btn btn-primary" id="runsubmit" name="runsubmit" style="">
 				Run
 			</button>
+			</div>
 		</form>
-		<button class="" onclick="testfun()" id="runsubmit2" name="runsubmit2" style="margin-left:0px;">
-				Run
-		</button>
+		</div>
+		
 		<div id="editor">
 		</div>
         <!-- NEW -->

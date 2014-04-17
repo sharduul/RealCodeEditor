@@ -6,9 +6,10 @@ http = require('http'),
 sharejs = require('share').server;
 
 var app = express();
-  //.use(express.bodyParser())
-  //.use(express.router)
-  //.use(express.static('public'));
+	// commented intentionally. keep it for reference.
+	//.use(express.bodyParser())
+	//.use(express.router)
+	//.use(express.static('public'));
 var server = http.createServer(app); 
 
 var options = {db:{type:'none'}}; // See docs for options. {type: 'redis'} to enable     persistance.
@@ -16,6 +17,7 @@ var options = {db:{type:'none'}}; // See docs for options. {type: 'redis'} to en
 // Attach the sharejs REST and Socket.io interfaces to the server
 sharejs.attach(app, options);
 
+// commented intentionally. keep it for reference.
 //app.use(app.router);
 //app.set('views', __dirname + '/views');
 //app.engine('html', require('ejs').renderFile);
@@ -25,11 +27,14 @@ server.listen(8000, function () {
 });
 
 app.get('/', function(req, res) {
-	console.log("test log");
-	
+	console.log("test root");
+    res.redirect('index.html');
+});
+
+app.get('/run_program', function(req, res) {
+	console.log("test run program");
 	run_ssh2();
-	//ssh2 = require('./testssh2.js')
-		   
+	//ssh2 = require('./testssh2.js'); // commented intentionally. keep it for reference.
     res.redirect('index.html');
 });
 
