@@ -1,5 +1,6 @@
 var var_password = 'Awesome_armp1t';
 var var_uname = 'scb8803';
+var program_file_name = "program_to_run.c";
 
 var express = require('express'),
 http = require('http'),
@@ -16,6 +17,9 @@ var options = {db:{type:'none'}}; // See docs for options. {type: 'redis'} to en
 
 // Attach the sharejs REST and Socket.io interfaces to the server
 sharejs.attach(app, options);
+//app.use(express.json());       // to support JSON-encoded bodies
+//app.use(express.urlencoded()); // to support URL-encoded bodies
+
 
 // commented intentionally. keep it for reference.
 //app.use(app.router);
@@ -32,15 +36,43 @@ app.get('/', function(req, res) {
 });
 
 app.get('/run_program', function(req, res) {
-	console.log("test run program");
-	run_ssh2();
-	//ssh2 = require('./testssh2.js'); // commented intentionally. keep it for reference.
-    res.redirect('index.html');
+	
+	console.log("empty program");
+	console.log(req.params.sharetext);
+    res.redirect('/index.html');
 });
+
+app.get('/run_program/:sharetext', function(req, res) {
+	console.log("test run program");
+	//console.log(req.params.sharetext);
+
+	write_to_file(program_file_name, req.params.sharetext);
+	run_ssh2();
+	
+	//ssh2 = require('./testssh2.js'); // commented intentionally. keep it for reference.
+    res.redirect('/index.html');
+});
+
+
+
+
+
 
 app.use(express.static(__dirname + '/public'));
 
 
+
+function write_to_file(path, content)
+{
+	var fs = require('fs');
+	fs.writeFile(path, content, function(err) {
+		if(err) {
+			console.log(err);
+		} else {
+			console.log("The file was saved!");
+		}
+	}); 
+}
 
 
 
@@ -64,7 +96,7 @@ function run_ssh2()
 					console.log( "- SFTP started" );
 					
 					
-					sftp.unlink( "testfile.py", function(err){ 
+					sftp.unlink( program_file_name, function(err){ 
 							
 						if ( err ) {
 							console.log( "Error, problem starting SFTP: %s", err );
@@ -78,8 +110,8 @@ function run_ssh2()
 					});
 	 
 					// upload file
-					var readStream = fs.createReadStream( "testfile.py" );
-					var writeStream = sftp.createWriteStream( "testfile.py" );
+					var readStream = fs.createReadStream(program_file_name);
+					var writeStream = sftp.createWriteStream(program_file_name);
 					
 					
 					writeStream.on('end', function () {
@@ -96,7 +128,7 @@ function run_ssh2()
 						
 							console.log( "- file transferred" );
 							
-							sftp.chmod( "testfile.py", 777, function(err){ 
+							sftp.chmod( program_file_name, 777, function(err){ 
 							
 								if ( err ) {
 									console.log( "Error, problem starting SFTP: %s", err );
@@ -112,7 +144,7 @@ function run_ssh2()
 							
 							
 							//execute the program
-							c.exec('python testfile.py', function(err, stream) {
+							c.exec('gcc -o testc ' + program_file_name + ' && ./testc', function(err, stream) {
 								
 								if (err) throw err;
 								stream.on('data', function(data, extended) {
