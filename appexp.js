@@ -17,9 +17,6 @@ var options = {db:{type:'none'}}; // See docs for options. {type: 'redis'} to en
 
 // Attach the sharejs REST and Socket.io interfaces to the server
 sharejs.attach(app, options);
-//app.use(express.json());       // to support JSON-encoded bodies
-//app.use(express.urlencoded()); // to support URL-encoded bodies
-
 
 // commented intentionally. keep it for reference.
 //app.use(app.router);
@@ -36,9 +33,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/run_program', function(req, res) {
-	
 	console.log("empty program");
-	console.log(req.params.sharetext);
     res.redirect('/index.html');
 });
 
@@ -52,9 +47,6 @@ app.get('/run_program/:sharetext', function(req, res) {
 	//ssh2 = require('./testssh2.js'); // commented intentionally. keep it for reference.
     res.redirect('/index.html');
 });
-
-
-
 
 
 
