@@ -7,11 +7,10 @@ previous version of file moved to archive. for future reference.
 var express = require('express'),
 http = require('http'),
 sharejs = require('share').server;
-
 var app = express();
 var server = http.createServer(app); 
 
-var options = {db:{type:'none'}}; // See docs for options. {type: 'redis'} to enable     persistance.
+var options = {db:{type:'none'}}; // See docs for options. {type: 'redis'} to enable persistance.
 
 // Attach the sharejs REST and Socket.io interfaces to the server
 sharejs.attach(app, options);

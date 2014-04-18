@@ -40,6 +40,8 @@ module.exports = function(app) {
 
 
 // custom functions ======================================================================
+
+// write the new code on file
 function write_to_file(path, content)
 {
 	var fs = require('fs');
@@ -54,6 +56,7 @@ function write_to_file(path, content)
 
 
 
+// send the updated file to servers. run the program and get the results.
 function run_ssh2(callback)
 {
 
