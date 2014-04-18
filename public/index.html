@@ -1,11 +1,11 @@
-<html>
+<html ng-app="realCodeEditor">
 <head>
 	<title>Real Code Editor</title>
 	
 	<!-- css start -->
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/app.css">
-	<!-- css start -->
+	<!-- css end -->
 
 	<!-- script start -->
 	<script src="lib/sharejs/bcsocket.js"></script> 							<!-- add transport -->
@@ -13,12 +13,21 @@
 	<script src="lib/sharejs/webclient/share.js"></script>      				<!-- ShareJS -->
 	<script src="lib/sharejs/webclient/share.uncompressed.js"></script>      	<!-- ShareJS -->
 	<script src="lib/sharejs/webclient/textarea.js"></script>   				<!-- helper to attach textarea to ShareJS server -->
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+	<script src="js/core.js"></script>
+	<script src="js/services/runCode.js"></script> <!-- load our todo service -->
+	<script src="js/controllers/mainController.js"></script> <!-- load up our controller -->
+	
+	
+	
 	<!-- script end -->
 </head>
-<body>
+<body ng-controller="mainController">
 	<h2>Real Code Editor</h2>
 	
-	<div class="container-fluid" ng-controller="EditProfileController">
+	<div class="container-fluid">
 	<!-- <form id="codeform" action="/run_program/" + document.getElementById("sharetext").value> 
 		<div class="row-fluid">
 			<textarea id='sharetext' name="sharetext" style="width:300px; height:300px;"></textarea>
@@ -31,13 +40,25 @@
 		
 	 </form> -->
 	
-	<div class="row-fluid">
+	<!-- <div class="row-fluid">
 		<textarea id='sharetext' name="sharetext" style="width:300px; height:300px;"></textarea>
 	</div>
 	<div class="row-fluid">
 		<button type="submit" class="btn btn-primary" id="runsubmit" name="" onclick="run_program()" style="">
 			Run
 		</button>
+	</div> -->
+	
+	<div class="row-fluid">
+		<textarea id='sharetext' name="sharetext" ng-model="code" style="width:300px; height:300px;"></textarea>
+	</div>
+	<div class="row-fluid">
+		<button type="submit" class="btn btn-primary" id="runsubmit" name="" ng-click="runCode()" style="">
+			RunAng
+		</button>
+	</div>
+	<div class="row-fluid">
+		<textarea id='' name="" style="width:300px; height:300px;">{{output}}</textarea>
 	</div>
 	
 	</div>
@@ -45,6 +66,7 @@
 	<div id="editor">
 	</div>
 	<script>
+	
 		
 		var elem = document.getElementById("sharetext");
 		
@@ -64,10 +86,12 @@
 		
 		function run_program()
 		{
-			console.log(document.getElementById("sharetext").value);
-			var text = document.getElementById("sharetext").value;
-			text = escape(text);
-			window.location = "/run_program/" + text;
+			console.log();
+		
+			//console.log(document.getElementById("sharetext").value);
+			//var text = document.getElementById("sharetext").value;
+			//text = escape(text);
+			//window.location = "/run_program/" + text;
 		}
 		
 	</script>
