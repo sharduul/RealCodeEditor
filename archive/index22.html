@@ -1,0 +1,140 @@
+<html ng-app="realCodeEditor">
+<head>
+	<title>Real Code Editor</title>
+	
+	<!-- css start -->
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/app.css">
+	
+	<link rel="stylesheet" href="css/codemirror.css">
+    <link rel="stylesheet" href="lib/codemirror/addon/lint/lint.css">
+	<!-- css end -->
+
+	<!-- script start -->
+	<script src="lib/sharejs/bcsocket.js"></script> 							<!-- add transport -->
+	<script src="lib/sharejs/bcsocket-uncompressed.js"></script>             	<!-- add transport -->
+	<script src="lib/sharejs/webclient/share.js"></script>      				<!-- ShareJS -->
+	<script src="lib/sharejs/webclient/share.uncompressed.js"></script>      	<!-- ShareJS -->
+	<script src="lib/sharejs/webclient/textarea.js"></script>   				<!-- helper to attach textarea to ShareJS server -->
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>			<!-- load jQuery -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>		<!-- load angular -->
+	<script src="js/core.js"></script>
+	<script src="js/services/runCode.js"></script> 												<!-- load our run code service -->
+	<script src="js/controllers/mainController.js"></script> 									<!-- load our main controller -->
+	
+	<script src="lib/codemirror.js"></script>
+	<script src="lib/attach_codemirror.js"></script>
+	<script src="lib/codemirror/mode/javascript/javascript.js"></script>
+    <script src="lib/codemirror/mode/htmlembedded/htmlembedded.js"></script>
+    <script src="lib/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="lib/codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="lib/codemirror/addon/edit/closebrackets.js"></script>
+    <script src="lib/codemirror/addon/display/placeholder.js"></script>
+    <script src="lib/codemirror/addon/search/match-highlighter.js"></script>
+    <script src="lib/codemirror/addon/selection/active-line.js"></script>
+    <script src="lib/codemirror/addon/lint/lint.js"></script>
+	<script src="lib/codemirror/addon/lint/json-lint.js"></script>
+    <script src="lib/codemirror/addon/lint/javascript-lint.js"></script>
+    <script src="lib/codemirror/addon/lint/lint.js"></script>
+	
+	<script src="http://ajaxorg.github.com/ace/build/src/ace.js"></script> 
+	<script src="lib/sharejs/webclient/ace.js"></script>  
+	 
+	<!-- script end -->
+	
+	<script>
+	
+			
+	</script>
+	
+	<style>
+	.codemirror {border-top: 1px solid black; border-bottom: 1px solid black;}
+	.activeline {background: #e8f2ff !important;}
+	</style>
+	
+</head>
+<body ng-controller="mainController">
+	<h2>Real Code Editor</h2>
+	
+	<div class="container-fluid">
+	
+		<div class="" style="float:left; margin-right:10px;">
+			<!-- <div>
+				<textarea id="sharetext" name="sharetext" style="width:600px; height:450px;"></textarea>
+			</div> -->
+			
+			<div id="sharetext" style="width:500px; height:250px;"></div>
+			
+			<div>
+				<button type="submit" class="btn btn-primary" id="runsubmit" name="" ng-click="runCode()" style="">
+					Run
+				</button>
+			</div>
+		</div>
+		<div class="" style="float:left;">
+			<textarea readonly id='' name="" style="width:500px; height:250px;">{{output}}</textarea>
+		</div>
+	
+	</div>
+	
+	
+	
+	<script>
+	
+	
+	var editor = ace.edit("sharetext");
+
+    sharejs.open('hello', 'text', function(error, doc) {
+	
+		if (error) 
+		{
+			console.log("ERROR:", error);
+		} 
+		else 
+		{
+			doc.attach_ace(editor);
+		}
+        
+    });
+	
+	
+	
+		/*var editor = CodeMirror.fromTextArea(document.getElementById("sharetext"), {
+                               //mode: "text/x-csrc",
+                               lineNumbers: true,
+                               smartIndent: true,
+                               tabMode: "shift",
+							   //placeholder: "Your code goes here",
+                               matchBrackets: true,
+                               autoCloseBrackets: true
+
+
+                            });
+		
+		//var elem = document.getElementById("sharetext");
+		
+		var elem = editor;
+		
+		// connect to the server
+		var connection = sharejs.open('test', 'text', function(error, doc) {
+			// this function is called once the connection is opened
+			if (error) 
+			{
+				console.log("ERROR:", error);
+			} 
+			else 
+			{
+				// attach the ShareJS document to the textarea
+				//doc.attach_textarea(elem);
+				
+				doc.attach_codemirror(editor);
+			}
+		});*/
+		
+		
+		
+		
+	</script>
+</body>
+</html>

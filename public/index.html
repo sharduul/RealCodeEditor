@@ -19,6 +19,10 @@
 	<script src="js/core.js"></script>
 	<script src="js/services/runCode.js"></script> 												<!-- load our run code service -->
 	<script src="js/controllers/mainController.js"></script> 									<!-- load our main controller -->
+	
+	<script src="http://ajaxorg.github.com/ace/build/src/ace.js"></script> 
+	<script src="lib/sharejs/webclient/ace.js"></script>  
+	 
 	<!-- script end -->
 	
 </head>
@@ -27,40 +31,44 @@
 	
 	<div class="container-fluid">
 	
-		<div class="row-fluid">
-			<textarea id='sharetext' name="sharetext" style="width:300px; height:300px;"></textarea>
+		<div class="" style="float:left; margin-right:20px; border-color:#000000;">
+			<!-- <div>
+				<textarea id="sharetext" name="sharetext" style="width:600px; height:450px;"></textarea>
+			</div> -->
+			
+			<div id="sharetext" style="width:600px; height:450px; margin-bottom:10px; border: 1px solid #DFDFDF;"></div>
+			
+			<div>
+				<button type="submit" class="btn btn-primary" id="runsubmit" name="" ng-click="runCode()" style="">
+					Run
+				</button>
+			</div>
 		</div>
-		<div class="row-fluid">
-			<button type="submit" class="btn btn-primary" id="runsubmit" name="" ng-click="runCode()" style="">
-				Run
-			</button>
-		</div>
-		<div class="row-fluid">
-			<textarea id='' name="" style="width:300px; height:300px;">{{output}}</textarea>
+		<div class="" style="float:left;">
+			<textarea readonly id='' name="" style="width:500px; height:250px;">{{output}}</textarea>
 		</div>
 	
 	</div>
 	
-	<div id="editor">
-	</div>
+	
+	
 	<script>
+	
+	
+		var editor = ace.edit("sharetext");
+		sharejs.open('hello', 'text', function(error, doc) {
 		
-		var elem = document.getElementById("sharetext");
-		
-		// connect to the server
-		var connection = sharejs.open('test', 'text', function(error, doc) {
-			// this function is called once the connection is opened
 			if (error) 
 			{
 				console.log("ERROR:", error);
 			} 
 			else 
 			{
-				// attach the ShareJS document to the textarea
-				doc.attach_textarea(elem);
+				doc.attach_ace(editor);
 			}
+			
 		});
-		
+	
 	</script>
 </body>
 </html>
