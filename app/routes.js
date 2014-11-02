@@ -1,5 +1,5 @@
 
-var var_password = 'Awesome_armp1t';
+var var_password = '';
 var var_uname = 'scb8803';
 var program_file_name = "program_to_run.c";
 var program_result = "";
